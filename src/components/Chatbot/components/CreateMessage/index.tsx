@@ -4,14 +4,15 @@ import style from './create.module.css';
 import { IMessage } from '../../../../models';
 
 interface ICreateMessage {
-	setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>;
+	onClickSendMessage: (message: IMessage) => void;
 }
-export const CreateMessage: FC<ICreateMessage> = ({ setMessages }) => {
+export const CreateMessage: FC<ICreateMessage> = ({ onClickSendMessage }) => {
 	const [dataNewMessage, setDataNewMessage] = useState({
 		name: '',
 		message: '',
 		id: '',
-		date: ''
+		date: '',
+		answer: { name: '', message: '' }
 	});
 
 	const handleChange = evt => {
@@ -27,12 +28,15 @@ export const CreateMessage: FC<ICreateMessage> = ({ setMessages }) => {
 			id: nanoid(),
 			date: `${dateNow.getHours()}:${dateNow.getMinutes()}`
 		};
-		setMessages(prev => prev.concat(newMessage));
+		console.log('newMessage:', newMessage);
+
+		onClickSendMessage(newMessage);
 		setDataNewMessage({
 			name: '',
 			message: '',
 			id: '',
-			date: ''
+			date: '',
+			answer: { name: '', message: '' }
 		});
 	};
 

@@ -8,4 +8,5 @@ export interface IMessage {
 	message: string;
 	id: string;
 	date: string;
+	answer: { name: string; message: string };
 }

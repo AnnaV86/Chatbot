@@ -21,6 +21,19 @@ export const Chatbot = () => {
 		setOpenAnswer(true);
 	};
 
+	const onClickSendMessage = message => {
+		if (openAnswer) {
+			const messageWithAnswer = { ...message, answer: dataAnswer };
+			console.log('messageWithAnswer:', messageWithAnswer);
+			setMessages(prev => prev.concat(messageWithAnswer));
+			setOpenAnswer(false);
+			return setDataAnswer({ name: '', message: '' });
+		} else setMessages(prev => prev.concat(message));
+		console.log('message:', message);
+		setOpenAnswer(false);
+		return setDataAnswer({ name: '', message: '' });
+	};
+
 	return (
 		<section className={style.chatbot}>
 			<div className={style.wrapper}>
@@ -68,7 +81,7 @@ export const Chatbot = () => {
 							</div>
 						)}
 					</div>
-					<CreateMessage setMessages={setMessages} />
+					<CreateMessage onClickSendMessage={onClickSendMessage} />
 				</div>
 				<div className={style.buttonClose}></div>
 			</div>

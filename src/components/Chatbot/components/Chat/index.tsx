@@ -15,6 +15,7 @@ interface IChat {
 }
 
 export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
+	console.log('я тут:', messages);
 	const answerBot = () => {
 		const dateNow = new Date();
 		const botPost =
@@ -22,7 +23,8 @@ export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
 		const newBotMessage: IMessage = {
 			...botPost,
 			id: nanoid(),
-			date: `${dateNow.getHours()}:${dateNow.getMinutes()}`
+			date: `${dateNow.getHours()}:${dateNow.getMinutes()}`,
+			answer: { name: '', message: '' }
 		};
 		setMessages(prev => prev.concat(newBotMessage));
 	};
@@ -47,6 +49,16 @@ export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
 					</div>
 				) : (
 					<div className={style.usersMessage} key={post.id}>
+						{post.answer.name && (
+							<div className={style.answerMessage}>
+								<p className={style.answerUser}>
+									{post.answer.name}
+								</p>
+								<p className={style.answerText}>
+									{post.answer.message}
+								</p>
+							</div>
+						)}
 						<Message logo={userLogo} post={post} />
 						<p
 							className={style.answer}

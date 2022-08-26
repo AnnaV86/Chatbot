@@ -43,3 +43,27 @@
 .usersMessage:hover .answer {
 	display: block;
 }
+
+.answerMessage {
+	margin-left: 10px;
+	border-left: thick double #bbb;
+	margin-bottom: 5px;
+}
+
+.answerUser {
+	margin: 0;
+	padding: 0;
+	font-size: 7px;
+	margin-left: 5px;
+}
+
+.answerText {
+	margin: 0;
+	padding: 0;
+	font-size: 9px;
+	margin-top: 1px;
+	margin-left: 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
