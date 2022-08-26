@@ -1,0 +1,112 @@
+.chatbot {
+	width: 300px;
+	height: 570px;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.wrapper {
+	width: 250px;
+	background-color: #171d37;
+	height: 100%;
+	border-radius: 10px 10px 0;
+	margin-left: 50px;
+	position: absolute;
+}
+
+.buttonClose {
+	position: relative;
+	top: -540px;
+	left: -30px;
+	width: 30px;
+	height: 30px;
+	background-color: #4288fa;
+	border: none;
+	border-radius: 5px 0 0 0;
+	background-image: url(../../images/right_line.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.title {
+	margin: 15px 0;
+	color: #fff;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 400;
+}
+
+.container {
+	margin: 0 auto;
+	width: 235px;
+	height: 510px;
+	background-color: #fff;
+	border-radius: 5px;
+	font-size: 13px;
+	font-weight: 400;
+	color: #bbbbbb;
+}
+
+.update {
+	height: 25px;
+	width: 220px;
+	margin: 0 auto;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px #bbc1c1;
+	padding-left: 10px;
+	box-sizing: border-box;
+	display: flex;
+	justify-self: center;
+	align-items: center;
+}
+
+.updateButtons {
+	width: 15px;
+	height: 15px;
+	margin-right: 3px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: unset;
+	cursor: pointer;
+}
+
+.updateButtons:last-child {
+	margin-left: 96px;
+}
+
+.answer {
+	height: 40px;
+	margin-left: 10px;
+	margin-bottom: 2px;
+}
+
+.answerTitle {
+	margin: 3px 0;
+	font-size: 9px;
+	font-weight: 400;
+}
+
+.answerUserText {
+	margin-left: 10px;
+	border-left: thick double #bbb;
+}
+
+.answerUser {
+	margin: 0;
+	padding: 0;
+	font-size: 7px;
+	margin-left: 5px;
+}
+
+.answerText {
+	margin: 0;
+	padding: 0;
+	font-size: 9px;
+	margin-top: 5px;
+	margin-left: 5px;
+}

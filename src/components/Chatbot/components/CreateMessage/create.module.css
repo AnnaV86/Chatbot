@@ -1,0 +1,53 @@
+.form {
+	width: 220px;
+	margin: 0 auto;
+}
+
+.inputName {
+	padding: 0;
+	margin-bottom: 5px;
+	height: 25px;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+	background-color: #edeef2;
+	text-align: center;
+	font-size: 9px;
+	font-weight: 400;
+}
+
+.inputMessage {
+	padding: 0;
+	height: 103px;
+	margin-bottom: 5px;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+	background-color: #edeef2;
+	position: relative;
+	font-size: 9px;
+	font-weight: 400;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+.inputMessage::placeholder {
+	text-align: center;
+	padding-top: 40px;
+}
+
+.buttonSend {
+	position: absolute;
+	bottom: 28px;
+	right: 18px;
+	width: 24px;
+	height: 24px;
+	background-color: #fff;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 2px 2px #bbc1c1;
+	background-image: url(../../../../images/telegram_line.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}

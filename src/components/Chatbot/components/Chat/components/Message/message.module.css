@@ -1,0 +1,25 @@
+.image {
+	position: absolute;
+	left: -24px;
+	bottom: 0;
+	border: 2px solid #bbbbbb;
+	border-radius: 50%;
+}
+
+.name {
+	font-size: 7px;
+	margin: 2px 0 0 2px;
+}
+
+.text {
+	font-size: 9px;
+	margin: 3px 5px 15px 15px;
+}
+
+.time {
+	font-size: 7px;
+	margin: 0;
+	position: absolute;
+	right: 5px;
+	bottom: 2px;
+}
