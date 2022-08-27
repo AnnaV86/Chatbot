@@ -8,7 +8,7 @@ const devServer: DevServerConfiguration = {
 	open: true,
 	compress: true,
 	hot: true,
-	port: 8080
+	port: 3000
 };
 
 const config: Configuration = {

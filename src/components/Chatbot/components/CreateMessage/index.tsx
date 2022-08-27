@@ -1,22 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import style from './create.module.css';
-import { IMessage } from '../../../../models';
+import { IMessage, StylesTextarea } from '../../../../models';
+import { resetStyles } from '../../../../utils';
 
 interface ICreateMessage {
 	onClickSendMessage: (message: IMessage) => void;
+	styleTextarea: string[];
 }
-export const CreateMessage: FC<ICreateMessage> = ({ onClickSendMessage }) => {
-	const [dataNewMessage, setDataNewMessage] = useState({
+
+export const CreateMessage: FC<ICreateMessage> = ({
+	onClickSendMessage,
+	styleTextarea
+}) => {
+	const [dataNewMessage, setDataNewMessage] = useState<IMessage>({
 		name: '',
 		message: '',
 		id: '',
 		date: '',
-		answer: { name: '', message: '' }
+		answer: { name: '', message: '', styles: '' },
+		styles: ''
 	});
+	const inputEl = useRef<HTMLTextAreaElement>(null);
 
 	const handleChange = evt => {
 		const { name, value } = evt.target;
+
 		setDataNewMessage(prev => ({ ...prev, [name]: value }));
 	};
 
@@ -25,10 +34,10 @@ export const CreateMessage: FC<ICreateMessage> = ({ onClickSendMessage }) => {
 		const dateNow = new Date();
 		const newMessage = {
 			...dataNewMessage,
+			styles: dataNewMessage.styles?.trim(),
 			id: nanoid(),
 			date: `${dateNow.getHours()}:${dateNow.getMinutes()}`
 		};
-		console.log('newMessage:', newMessage);
 
 		onClickSendMessage(newMessage);
 		setDataNewMessage({
@@ -36,9 +45,49 @@ export const CreateMessage: FC<ICreateMessage> = ({ onClickSendMessage }) => {
 			message: '',
 			id: '',
 			date: '',
-			answer: { name: '', message: '' }
+			answer: { name: '', message: '', styles: '' },
+			styles: ''
 		});
 	};
+
+	useEffect(() => {
+		const [first, second] = styleTextarea;
+
+		if (inputEl.current) {
+			if (first === StylesTextarea.CHECK_LIST) {
+				setDataNewMessage(prev => ({
+					...prev,
+					message: dataNewMessage.message
+						.split('\n')
+						.map(el => `${'*'} ${el}`)
+						.join('\n')
+				}));
+			}
+
+			if (first === StylesTextarea.NUMBER_LIST) {
+				setDataNewMessage(prev => ({
+					...prev,
+					message: dataNewMessage.message
+						.split('\n')
+						.map((el, index) => `${index + 1} ${el}`)
+						.join('\n')
+				}));
+			}
+
+			if (first === StylesTextarea.RESET) {
+				resetStyles(inputEl);
+				setDataNewMessage(prev => ({ ...prev, styles: '' }));
+			}
+
+			if (second) {
+				inputEl.current.style[first] = second;
+				setDataNewMessage(prev => ({
+					...prev,
+					styles: prev.styles + `${first}:${second} `
+				}));
+			}
+		}
+	}, [styleTextarea]);
 
 	return (
 		<form className={style.form}>
@@ -56,6 +105,7 @@ export const CreateMessage: FC<ICreateMessage> = ({ onClickSendMessage }) => {
 				className={style.inputMessage}
 				placeholder="Сообщение"
 				value={dataNewMessage.message}
+				ref={inputEl}
 			></textarea>
 			<button
 				className={style.buttonSend}

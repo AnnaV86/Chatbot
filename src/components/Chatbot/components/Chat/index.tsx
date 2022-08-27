@@ -1,21 +1,20 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-import { botMessages } from '../../../../constants/botMessages';
+import { botMessages } from '../../../../constants';
 import userLogo from '../../../../images/user_3_fill.svg';
 import botLogo from '../../../../images/android_2_line.svg';
-import { ICreateMessage, IMessage } from '../../../../models';
+import { IMessage } from '../../../../models';
 
 import style from './chat.module.css';
 import { Message } from './components/Message';
 
 interface IChat {
-	onClickAnswer: ({ name, message }: ICreateMessage) => void;
+	onClickAnswer: ({ name, message, styles }: IMessage) => void;
 	messages: IMessage[];
 	setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>;
 }
 
 export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
-	console.log('я тут:', messages);
 	const answerBot = () => {
 		const dateNow = new Date();
 		const botPost =
@@ -24,7 +23,8 @@ export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
 			...botPost,
 			id: nanoid(),
 			date: `${dateNow.getHours()}:${dateNow.getMinutes()}`,
-			answer: { name: '', message: '' }
+			styles: '',
+			answer: { name: '', message: '', styles: '' }
 		};
 		setMessages(prev => prev.concat(newBotMessage));
 	};
@@ -36,20 +36,23 @@ export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
 
 	return (
 		<div className={style.chat}>
-			{messages.slice(-4).map(post =>
+			{messages.map(post =>
 				post.name === 'Чат-бот' ? (
-					<div className={style.botMessage} key={post.id}>
+					<div
+						className={style.botMessage}
+						key={post.id}
+						onClick={() => onClickAnswer(post)}
+					>
 						<Message logo={botLogo} post={post} />
-						<p
-							className={style.answer}
-							onClick={() => onClickAnswer(post)}
-						>
-							Ответить
-						</p>
+						<p className={style.answer}>Ответить</p>
 					</div>
 				) : (
-					<div className={style.usersMessage} key={post.id}>
-						{post.answer.name && (
+					<div
+						className={style.usersMessage}
+						key={post.id}
+						onClick={() => onClickAnswer(post)}
+					>
+						{post.answer?.name && (
 							<div className={style.answerMessage}>
 								<p className={style.answerUser}>
 									{post.answer.name}
@@ -60,12 +63,7 @@ export const Chat: FC<IChat> = ({ onClickAnswer, messages, setMessages }) => {
 							</div>
 						)}
 						<Message logo={userLogo} post={post} />
-						<p
-							className={style.answer}
-							onClick={() => onClickAnswer(post)}
-						>
-							Ответить
-						</p>
+						<p className={style.answer}>Ответить</p>
 					</div>
 				)
 			)}

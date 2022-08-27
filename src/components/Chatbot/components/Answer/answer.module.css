@@ -1,0 +1,25 @@
+.answerTitle {
+	margin: 3px 0;
+	font-size: 9px;
+	font-weight: 400;
+}
+
+.answerUserText {
+	margin-left: 10px;
+	border-left: thick double #bbb;
+}
+
+.answerUser {
+	margin: 0;
+	padding: 0;
+	font-size: 7px;
+	margin-left: 5px;
+}
+
+.answerText {
+	margin: 0;
+	padding: 0;
+	font-size: 9px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
