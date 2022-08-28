@@ -2,7 +2,12 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import style from './create.module.css';
 import { IMessage, StylesTextarea } from '../../../../models';
-import { resetStyles } from '../../../../utils';
+import {
+	addCheckList,
+	addNumberList,
+	addStyle,
+	resetStyles
+} from '../../../../utils';
 
 interface ICreateMessage {
 	onClickSendMessage: (message: IMessage) => void;
@@ -57,20 +62,14 @@ export const CreateMessage: FC<ICreateMessage> = ({
 			if (first === StylesTextarea.CHECK_LIST) {
 				setDataNewMessage(prev => ({
 					...prev,
-					message: dataNewMessage.message
-						.split('\n')
-						.map(el => `${'*'} ${el}`)
-						.join('\n')
+					message: addCheckList(dataNewMessage)
 				}));
 			}
 
 			if (first === StylesTextarea.NUMBER_LIST) {
 				setDataNewMessage(prev => ({
 					...prev,
-					message: dataNewMessage.message
-						.split('\n')
-						.map((el, index) => `${index + 1} ${el}`)
-						.join('\n')
+					message: addNumberList(dataNewMessage)
 				}));
 			}
 
@@ -81,9 +80,9 @@ export const CreateMessage: FC<ICreateMessage> = ({
 
 			if (second) {
 				inputEl.current.style[first] = second;
-				setDataNewMessage(prev => ({
+				setDataNewMessage((prev: IMessage) => ({
 					...prev,
-					styles: prev.styles + `${first}:${second} `
+					styles: addStyle(prev, first, second)
 				}));
 			}
 		}
