@@ -53,6 +53,7 @@ export const CreateMessage: FC<ICreateMessage> = ({
 			answer: { name: '', message: '', styles: '' },
 			styles: ''
 		});
+		resetStyles(inputEl);
 	};
 
 	useEffect(() => {
