@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { IMessage } from '../../../../../../models';
 import style from './message.module.css';
 
-export const Message = ({ logo, post }) => {
+interface IMessageData {
+	logo: string;
+	post: IMessage;
+}
+
+export const Message: FC<IMessageData> = ({ logo, post }) => {
 	let styles = {};
 	if (post.styles) {
 		styles = Object.fromEntries(

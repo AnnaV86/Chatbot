@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import style from './chatbot.module.css';
 import { Chat } from './components/Chat';
@@ -13,7 +13,7 @@ import { CreateMessage } from './components/CreateMessage';
 import { IMessage } from '../../models';
 import { Answer } from './components/Answer';
 
-export const Chatbot = () => {
+export const Chatbot: FC = () => {
 	const [messages, setMessages] = useState<IMessage[]>(initMessages);
 	const [openAnswer, setOpenAnswer] = useState(false);
 	const [dataAnswer, setDataAnswer] = useState({
@@ -28,15 +28,15 @@ export const Chatbot = () => {
 		setOpenAnswer(true);
 	};
 
-	const changeStyle = evt => {
+	const changeStyle = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		evt.stopPropagation();
-		const styles = evt.target.alt;
-		if (styles) {
-			setStyleTextarea(stylesForNewMessage[evt.target.alt]);
+		const alt = evt.target['alt'];
+		if (alt) {
+			setStyleTextarea(stylesForNewMessage[alt]);
 		}
 	};
 
-	const onClickSendMessage = message => {
+	const onClickSendMessage = (message: IMessage) => {
 		if (openAnswer) {
 			const messageWithAnswer = { ...message, answer: dataAnswer };
 			setMessages(prev => prev.concat(messageWithAnswer));

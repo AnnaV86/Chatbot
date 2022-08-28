@@ -28,13 +28,18 @@ export const CreateMessage: FC<ICreateMessage> = ({
 	});
 	const inputEl = useRef<HTMLTextAreaElement>(null);
 
-	const handleChange = evt => {
-		const { name, value } = evt.target;
+	const handleChange = (
+		evt: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+	) => {
+		const name = evt.target['name'];
+		const value = evt.target['value'];
 
 		setDataNewMessage(prev => ({ ...prev, [name]: value }));
 	};
 
-	const handleSendMessage = evt => {
+	const handleSendMessage = (
+		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
 		evt.preventDefault();
 		const dateNow = new Date();
 		const newMessage = {

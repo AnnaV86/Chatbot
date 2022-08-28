@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import style from './answer.module.css';
 
-export const Answer = ({ dataAnswer }) => {
+interface IAnswer {
+	dataAnswer: {
+		name: string;
+		message: string;
+		styles: string;
+	};
+}
+export const Answer: FC<IAnswer> = ({ dataAnswer }) => {
 	let styles = {};
 	if (dataAnswer.styles) {
 		styles = Object.fromEntries(

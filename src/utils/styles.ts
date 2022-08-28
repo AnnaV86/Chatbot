@@ -1,7 +1,7 @@
 import { stylesForNewMessage } from '../constants';
 import { IMessage } from '../models';
 
-export const resetStyles = inputEl => {
+export const resetStyles = (inputEl: React.RefObject<HTMLTextAreaElement>) => {
 	Object.entries(stylesForNewMessage).forEach(([_, [first, second]]) => {
 		if (second && inputEl.current) {
 			inputEl.current.style[first] = 'unset';
@@ -9,13 +9,13 @@ export const resetStyles = inputEl => {
 	});
 };
 
-export const addCheckList = dataNewMessage =>
+export const addCheckList = (dataNewMessage: IMessage) =>
 	dataNewMessage.message
 		.split('\n')
 		.map(el => `${'*'} ${el}`)
 		.join('\n');
 
-export const addNumberList = dataNewMessage =>
+export const addNumberList = (dataNewMessage: IMessage) =>
 	dataNewMessage.message
 		.split('\n')
 		.map((el, index) => `${index + 1} ${el}`)
